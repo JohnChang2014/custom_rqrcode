@@ -23,31 +23,22 @@ module RQRCode
 
 		data   = \
 		if format && format == :svg
-		svg
+			svg
 		else
 			image = MiniMagick::Image.read(svg) { |i| i.format "svg" }
 			image.format format
 
-			#image = RQRCode::mergeImages(image, bg) if bg
 			if bg
 				bg_image = MiniMagick::Image.open bg
-				gravity = options[:gravity] || "north"
-				image =  bg_image.composite(image) do |c|
+				gravity  = options[:gravity] || "north"
+				image    =  bg_image.composite(image) do |c|
 					c.gravity gravity
 				end
 			end
 
-		image.to_blob
+			image.to_blob
 		end
 
 		self.response_body = render_to_string(:text => data, :template => nil)
-	end
-
-	def mergeImages(image, bg, options)
-		bg_image = MiniMagick::Image.open bg
-		gravity = options[:gravity] || "north"
-		bg_image.composite(image) do |c|
-			c.gravity gravity
-		end
 	end
 end
