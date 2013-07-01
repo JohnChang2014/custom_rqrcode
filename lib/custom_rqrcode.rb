@@ -17,7 +17,8 @@ module RQRCode
 		level  = options[:level] || :h
 
 		bg     = options[:bg] || false
-
+		bsize  = options[:bsize] || false
+		
 		qrcode = RQRCode::QRCode.new(string, :size => size, :level => level)
 		svg    = RQRCode::Renderers::SVG::render(qrcode, options)
 
@@ -30,6 +31,7 @@ module RQRCode
 
 			if bg
 				bg_image = MiniMagick::Image.open bg
+				bg_image.resize bsize if bsize
 				gravity  = options[:gravity] || "north"
 				image    =  bg_image.composite(image) do |c|
 					c.gravity gravity

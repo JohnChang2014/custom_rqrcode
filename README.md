@@ -25,7 +25,7 @@ bg_image = Rails.root.join("app").to_s + ActionController::Base.helpers.asset_pa
 respond_to do |format|
   format.html
   format.svg  { render :qrcode => request.url, :level => :l, :unit => 10 }
-  format.png  { render :qrcode => request.url, :bg => bg_image, :gravity => "center" }
+  format.png  { render :qrcode => request.url, :bg => bg_image, :bsize => "200x100", :gravity => "center" }
   format.gif  { render :qrcode => request.url }
   format.jpeg { render :qrcode => request.url }
 end
