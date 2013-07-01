@@ -21,10 +21,11 @@ You will also want to add the **mini_magick** gem to your application's `Gemfile
 In your controller actions, you could return a QR code that links to the current page like this:
 
 ```ruby
+bg_image = "./images/bg_image.png"
 respond_to do |format|
   format.html
   format.svg  { render :qrcode => request.url, :level => :l, :unit => 10 }
-  format.png  { render :qrcode => request.url }
+  format.png  { render :qrcode => request.url, :bg => bg_image, :gravity => "center" }
   format.gif  { render :qrcode => request.url }
   format.jpeg { render :qrcode => request.url }
 end
@@ -43,7 +44,7 @@ end
 * `:fill`    – Background color (e.g "ffffff" or :white)
 * `:color`   – Foreground color for the code (e.g. "000000" or :black)
 * `:bg`      – Background image to be combined with QR code image (e.g. "./img/000.png")
-* `:gravity` – Location where QR code image will be put on the background image (e.g. "center" or "north")
+* `:gravity` – Location where QR code image will be put on the background image (e.g. "center", "north", "south")
 
 ## About
 
