@@ -1,4 +1,4 @@
-# Render and customize QR codes from Rails 3 applications
+# Render and customize QR codes with a background image
 
 This gem extends rqrcode-rails published by samvincent, supporting the output in either SVG or PNG, 
 
