@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.author      = "Johnson Chang"
   s.email       = "johnsonchang2012@gmail.com"
   s.homepage    = "http://github.com/johnsonchang2012/custom_rqrcode"
-  s.version     = "0.0.1"
+  s.version     = "0.0.2"
 
   s.add_dependency 'rqrcode', '>= 0.4.2'
 end
