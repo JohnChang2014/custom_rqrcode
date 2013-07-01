@@ -44,6 +44,7 @@ end
 * `:fill`    – Background color (e.g "ffffff" or :white)
 * `:color`   – Foreground color for the code (e.g. "000000" or :black)
 * `:bg`      – Background image to be combined with QR code image (e.g. "./img/000.png")
+* `:bsize`   – Resize background image (e.g. "300x200")
 * `:gravity` – Location where QR code image will be put on the background image (e.g. "center", "north", "south")
 
 ## About
