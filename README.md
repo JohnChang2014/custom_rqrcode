@@ -1,6 +1,8 @@
 # Render QR codes easily from your Rails 3 application
 
-This gem supports rendering either SVG or PNG, JPEG, and GIF formats.
+This gem extends rqrcode-rails published by samvincent, supporting to render either SVG or PNG, JPEG, and GIF formats and
+
+providing new options to 
 
 SVG, because of it's vector nature, will scale easily when intended for print. Offering QR endpoints enables others to integrate with your service in possibly interesting ways.
 
@@ -8,7 +10,7 @@ SVG, because of it's vector nature, will scale easily when intended for print. O
 
 Add the following to your `Gemfile`.
 
-    gem 'rqrcode-rails3'
+    gem 'custom_rqrcode'
 
 If you want to use the PNG, JPEG or GIF format, you will have to have **ImageMagick** installed on your system.
 You will also want to add the **mini_magick** gem to your application's `Gemfile`.
@@ -31,19 +33,21 @@ end
   
 #### Options:
 
-* `:size`   – This controls how big the QR Code will be. Smallest size will be chosen by default. Set to maintain consistent size.
-* `:level`  – The error correction level, can be:
+* `:size`    – This controls how big the QR Code will be. Smallest size will be chosen by default. Set to maintain consistent size.
+* `:level`   – The error correction level, can be:
   * Level `:l` 7%  of code can be restored
   * Level `:m` 15% of code can be restored
   * Level `:q` 25% of code can be restored
   * Level `:h` 30% of code can be restored (default :h) 
-* `:offset` – Padding around the QR Code (e.g. 10)
-* `:unit`   – How many pixels per module (e.g. 11)
-* `:fill`   – Background color (e.g "ffffff" or :white)
-* `:color`  – Foreground color for the code (e.g. "000000" or :black)
-  
+* `:offset`  – Padding around the QR Code (e.g. 10)
+* `:unit`    – How many pixels per module (e.g. 11)
+* `:fill`    – Background color (e.g "ffffff" or :white)
+* `:color`   – Foreground color for the code (e.g. "000000" or :black)
+* `:bg`      – Background image to be combined with QR code image (e.g. "./img/000.png")
+* `:gravity` – Location where QR code image will be put on the background image (e.g. "center" or "north")
+
 ## About
 
-This project was inspired by the first chapter in José Valim's book [Crafting Rails Applications](http://pragprog.com/titles/jvrails/crafting-rails-applications)
+This project was modified from samvincent's project [rqrcode-rails](https://github.com/samvincent/rqrcode-rails3)
 
 QR codes are encoded by [rqrcode](https://github.com/whomwah/rqrcode)
