@@ -20,6 +20,7 @@ module RQRCode
 		bsize    = options[:bsize] || false
 		geometry = options[:geometry] || "+00+00"
 		gravity  = options[:gravity] || "north"
+		fsize    = options[:fsize] || false
 		
 		qrcode = RQRCode::QRCode.new(string, :size => size, :level => level)
 		svg    = RQRCode::Renderers::SVG::render(qrcode, options)
@@ -39,7 +40,8 @@ module RQRCode
 					c.geometry geometry
 				end
 			end
-
+			image.resize fsize if fsize
+			
 			image.to_blob
 		end
 
