@@ -47,6 +47,7 @@ end
 * `:bsize`    – Resize background image (e.g. "300x200")
 * `:gravity`  – Location where QR code image will be put on the background image (e.g. "center", "north", "south")
 * `:geometry` – Adjust the position specifically where QR code image will be located on the image (e.g. "+00+10", "-10+30")
+* `:fsize` – Resize final images  (e.g. "400x300")
 
 ## About
 
