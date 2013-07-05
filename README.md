@@ -19,7 +19,6 @@ You will also want to add the **mini_magick** gem to your application's `Gemfile
 ## How to use
 
 In your controller actions, you could return a QR code that links to the current page like this:
-
 ```ruby
 bg_image = Rails.root.join("app").to_s + ActionController::Base.helpers.asset_path("images/bg_image.png")
 respond_to do |format|
