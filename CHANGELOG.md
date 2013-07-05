@@ -1,3 +1,7 @@
+## 0.1.1 2013-07-04
+### bugs fix
+  * fixed new version leading to the error of rendering method
+
 ## 0.1.0 2013-07-04
 ### major enhancements
   * Added CQRcode class to handle rendering tasks
