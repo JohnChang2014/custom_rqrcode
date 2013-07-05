@@ -21,7 +21,6 @@ You will also want to add the **mini_magick** gem to your application's `Gemfile
 In your controller actions, you could return a QR code that links to the current page like this:
 
 ```ruby
-First usage:
 bg_image = Rails.root.join("app").to_s + ActionController::Base.helpers.asset_path("images/bg_image.png")
 respond_to do |format|
   format.html
@@ -31,7 +30,10 @@ respond_to do |format|
   format.jpeg { render :qrcode => request.url }
 end
 
-Second usage:
+```
+
+In your controller actions, you could generate multiple QR codes on the background
+```ruby
 bg_image = Rails.root.join("app").to_s + ActionController::Base.helpers.asset_path("images/bg_image.png")
 cqrcode = RQRCode::CQRCode.new
 options = {
@@ -39,6 +41,8 @@ options = {
 	:bg   => bg_image
 }
 cqrcode.generateQRcode(options, :png)
+cqrcode.generateQRcode(options, :jpeg)
+cqrcode.generateQRcode(options, :gif)
 
 ```
   
