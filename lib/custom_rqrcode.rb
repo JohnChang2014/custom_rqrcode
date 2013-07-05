@@ -15,42 +15,8 @@ module RQRCode
 		format         = self.request.format.symbol
 		cqrcode        = RQRCode::CQRCode.new
 		options[:info] = string
-		cqrcode.generateQRcode(options, format)
-=begin
-		size   = options[:size]  || RQRCode.minimum_qr_size_from_string(string)
-		level  = options[:level] || :h
+		data           = cqrcode.generateQRcode(options, format)
 
-		bg       = options[:bg] || false
-		bsize    = options[:bsize] || false
-		geometry = options[:geometry] || "+00+00"
-		gravity  = options[:gravity] || "north"
-		fsize    = options[:fsize] || false
-		fsave    = options[:fsave] || false
-
-		qrcode = RQRCode::QRCode.new(string, :size => size, :level => level)
-		svg    = RQRCode::Renderers::SVG::render(qrcode, options)
-
-		data   = \
-		if format && format == :svg
-		svg
-		else
-			image = MiniMagick::Image.read(svg) { |i| i.format "svg" }
-			image.format format
-
-			if bg
-				bg_image = MiniMagick::Image.open bg
-				bg_image.resize bsize if bsize
-				image    =  bg_image.composite(image) do |c|
-					c.gravity gravity
-					c.geometry geometry
-				end
-			end
-		image.resize fsize if fsize
-		image.write fsave if fsave
-
-		image.to_blob
-		end
-=end
 		self.response_body = render_to_string(:text => data, :template => nil)
 	end
 
@@ -83,7 +49,7 @@ module RQRCode
 
 			data   = \
 			if format && format == :svg
-			svg
+				svg
 			else
 				image = MiniMagick::Image.read(svg) { |i| i.format "svg" }
 				image.format format
@@ -96,11 +62,12 @@ module RQRCode
 						c.geometry geometry
 					end
 				end
-			image.resize fsize if fsize
-			image.write fsave if fsave
+				image.resize fsize if fsize
+				image.write fsave if fsave
 
-			image.to_blob
+				image.to_blob
 			end
+			return data
 		end
 	end
 end
