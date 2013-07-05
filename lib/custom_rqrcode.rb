@@ -12,7 +12,11 @@ module RQRCode
 	extend SizeCalculator
 
 	ActionController::Renderers.add :qrcode do |string, options|
-		format = self.request.format.symbol
+		format         = self.request.format.symbol
+		cqrcode        = RQRCode::CQRCode.new
+		options[:info] = string
+		cqrcode.generateQRcode(options, format)
+=begin
 		size   = options[:size]  || RQRCode.minimum_qr_size_from_string(string)
 		level  = options[:level] || :h
 
@@ -21,13 +25,14 @@ module RQRCode
 		geometry = options[:geometry] || "+00+00"
 		gravity  = options[:gravity] || "north"
 		fsize    = options[:fsize] || false
-		
+		fsave    = options[:fsave] || false
+
 		qrcode = RQRCode::QRCode.new(string, :size => size, :level => level)
 		svg    = RQRCode::Renderers::SVG::render(qrcode, options)
 
 		data   = \
 		if format && format == :svg
-			svg
+		svg
 		else
 			image = MiniMagick::Image.read(svg) { |i| i.format "svg" }
 			image.format format
@@ -40,11 +45,62 @@ module RQRCode
 					c.geometry geometry
 				end
 			end
-			image.resize fsize if fsize
-			
-			image.to_blob
-		end
+		image.resize fsize if fsize
+		image.write fsave if fsave
 
+		image.to_blob
+		end
+=end
 		self.response_body = render_to_string(:text => data, :template => nil)
+	end
+
+	class CQRCode
+		@@defaults = {
+			:info     => "no data",
+			:bg       => false,
+			:bsize    => false,
+			:gravity  => "north",
+			:geometry => "+00+00",
+			:fsize    => false,
+			:fsave    => false
+		}
+
+		def generateQRcode(options={}, format=:svg)
+			options  = @@defaults.merge(options)
+			string   = options[:info]
+			size     = options[:size]  || RQRCode.minimum_qr_size_from_string(string)
+			level    = options[:level] || :h
+
+			bg       = options[:bg]
+			bsize    = options[:bsize]
+			geometry = options[:geometry]
+			gravity  = options[:gravity]
+			fsize    = options[:fsize]
+			fsave    = options[:fsave] 
+
+			qrcode = RQRCode::QRCode.new(string, :size => size, :level => level)
+			svg    = RQRCode::Renderers::SVG::render(qrcode, options)
+
+			data   = \
+			if format && format == :svg
+			svg
+			else
+				image = MiniMagick::Image.read(svg) { |i| i.format "svg" }
+				image.format format
+
+				if bg
+					bg_image = MiniMagick::Image.open bg
+					bg_image.resize bsize if bsize
+					image    =  bg_image.composite(image) do |c|
+						c.gravity gravity
+						c.geometry geometry
+					end
+				end
+			image.resize fsize if fsize
+			image.write fsave if fsave
+
+			image.to_blob
+			end
+		end
 	end
 end
