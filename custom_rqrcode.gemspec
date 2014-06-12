@@ -7,10 +7,12 @@ Gem::Specification.new do |s|
 
   s.files       = Dir["{app,lib,config}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.md"]
   s.date        = "2013-07-04"
-  s.author      = "Johnson Chang"
-  s.email       = "johnsonchang2012@gmail.com"
-  s.homepage    = "http://github.com/johnsonchang2012/custom_rqrcode"
+  s.author      = "John Chang"
+  s.email       = "johnchang2014@gmail.com"
+  s.homepage    = "http://github.com/johnchang2014/custom_rqrcode"
   s.version     = "0.1.1"
 
-  s.add_dependency 'rqrcode', '>= 0.4.2'
+  s.add_runtime_dependency 'rqrcode', '>= 0.4.2'
+  s.add_runtime_dependency 'rqrcode-rails3', '~> 0.1.7'
+  s.add_runtime_dependency 'mini_magick', '~> 3.7.0'
 end
