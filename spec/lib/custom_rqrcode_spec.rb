@@ -28,5 +28,18 @@ describe RQRCode::CQRCode do
 				}.to_not raise_error
 			end
 		end
+		
+		context "with options[:fsave] = current root path" do
+			it "does not raise error" do
+				filename = Time.now.nsec.to_s + '.png'
+				path     = Dir.pwd
+				filepath = [path, filename].join('/')
+				options = { :fsave => filepath }
+				expect { 
+					cqrcode.generateQRcode(options, :png)
+				}.to_not raise_error
+				File.delete filepath
+			end
+		end
 	end
 end
