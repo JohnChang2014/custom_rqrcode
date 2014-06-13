@@ -40,6 +40,18 @@ describe RQRCode::CQRCode do
 				}.to_not raise_error
 				File.delete filepath
 			end
+			
+			it "outputs image file in the current root path" do
+				filename = Time.now.nsec.to_s + '.png'
+				path     = Dir.pwd
+				filepath = [path, filename].join('/')
+				options = { :fsave => filepath }
+				cqrcode.generateQRcode(options, :png)
+				expect { 
+					File.exist? filepath
+				}.to be_true
+				File.delete filepath
+			end
 		end
 	end
 end
