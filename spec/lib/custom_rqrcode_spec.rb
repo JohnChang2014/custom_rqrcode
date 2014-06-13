@@ -16,6 +16,17 @@ describe RQRCode::CQRCode do
 				}.to_not raise_error
 			end
 			
+			it "returns qrcode in jpeg format with :jpeg" do
+				expect {
+					cqrcode.generateQRcode({}, :jpeg)
+				}.to_not raise_error
+			end
+			
+			it "returns qrcode in gif format with :gif" do
+				expect {
+					cqrcode.generateQRcode({}, :gif)
+				}.to_not raise_error
+			end
 		end
 	end
 end
