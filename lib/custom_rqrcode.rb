@@ -1,7 +1,8 @@
 require 'action_controller'
 require 'rqrcode'
-require 'rqrcode-rails3/size_calculator.rb'
-require 'rqrcode-rails3/renderers/svg.rb'
+require 'rqrcode-rails3'
+#require 'rqrcode-rails3/size_calculator.rb'
+#require 'rqrcode-rails3/renderers/svg.rb'
 
 module RQRCode
 	ActionController::Renderers.add :qrcode do |string, options|
