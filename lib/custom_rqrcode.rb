@@ -1,6 +1,7 @@
 require 'action_controller'
 require 'rqrcode'
 require 'rqrcode-rails3'
+require 'mini_magick'
 #require 'rqrcode-rails3/size_calculator.rb'
 #require 'rqrcode-rails3/renderers/svg.rb'
 
@@ -30,7 +31,6 @@ module RQRCode
 			qrcode = RQRCode::QRCode.new(string, :size => size, :level => level)
 			svg    = RQRCode::Renderers::SVG::render(qrcode, options)
 
-			data   = \
 			if format && format == :svg
 				svg
 			else
@@ -40,10 +40,8 @@ module RQRCode
 				mergeBackgroundImage(image, options) if options.key? :bg
 				image.resize options[:fsize] if options.key? :fsize
 				image.write options[:fsave] if options.key? :fsave
-
 				image.to_blob
 			end
-			return data
 		end
 
 		private
